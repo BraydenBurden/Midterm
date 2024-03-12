@@ -1,5 +1,25 @@
 const express = require('express');
+const mongoose = require('mongoose');
 const router = express.Router();
+
+// Connect to MongoDB
+mongoose.connect('mongodb+srv://braydenburden00:MidtermUserPass@testdb.iwqoxuz.mongodb.net/', { useNewUrlParser: true, useUnifiedTopology: true });
+const db = mongoose.connection;
+
+db.on('error', console.error.bind(console, 'MongoDB connection error:'));
+db.once('open', () => {
+  console.log('Connected to MongoDB');
+});
+
+// Define the Message schema
+const messageSchema = new mongoose.Schema({
+  text: String,
+  user: String,
+  added: Date
+});
+
+// Create the Message model
+const Message = mongoose.model('Message', messageSchema);
 
 function formatDate(date) {
   const userTimeZone = Intl.DateTimeFormat().resolvedOptions().timeZone;
@@ -50,31 +70,41 @@ const messages = [
    },
 ];
 
-router.get('/', (req, res) => {
-  res.render('index', { title: "ThreadThrills Board", messages: messages, timeAgo: timeAgo, formatDate: formatDate });
+router.get('/', async (req, res) => {
+  try {
+    // Fetch all messages from the database
+    const messages = await Message.find().sort({ added: -1 });
+
+    // Render the index page with the retrieved messages
+    res.render('index', { title: 'ThreadThrills Board', messages: messages, timeAgo: timeAgo, formatDate: formatDate });
+  } catch (error) {
+    console.error('Error fetching messages:', error);
+    res.status(500).send('Internal Server Error');
+  }
 });
 
 router.get('/new', (req, res) => {
   res.render('form', { title: 'New Message' });
 });
 
-router.post('/newMessage', (req, res) => {
-  // Get data from the form
-  const messageText = req.body.messageText;
-  const messageUser = req.body.messageUser;
+router.post('/newMessage', async (req, res) => {
+  const { messageText, messageUser } = req.body;
 
   // Create a new message object
-  const newMessage = {
+  const newMessage = new Message({
     text: messageText,
     user: messageUser,
     added: new Date()
-  };
+  });
 
-  // Add the new message to the messages array
-  messages.push(newMessage);
-
-  // Redirect back to the index page
-  res.redirect('/');
+  try {
+    // Save the new message to the database
+    await newMessage.save();
+    res.redirect('/');
+  } catch (error) {
+    console.error(error);
+    res.status(500).send('Internal Server Error');
+  }
 });
 
 router.post('/new', (req, res) => {
