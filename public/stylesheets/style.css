@@ -1,0 +1,136 @@
+html, body {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: rgb(46, 46, 46);
+  display: flex;
+  flex-direction: column;
+  padding: 50px;
+  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  color: whitesmoke;
+}
+
+a {
+  color: #00B7FF;
+}
+
+.title {
+  font-size: 3.5rem;
+  text-align: center;
+  text-decoration: underline;
+}
+
+.info {
+  text-align: center;
+  margin-bottom: 3rem;
+  width: 30%;
+  align-self: center;
+}
+
+.message-container {
+  display: flex;
+  flex-direction: column;
+  padding: 1.5rem;
+  background-color: rgb(84, 172, 3);
+  margin-bottom: 2rem;
+  width: 60%;
+  align-self: center;
+}
+
+.message-text {
+  align-self: center;
+  font-size: 1.25rem;
+}
+
+.message-date {
+  align-self: flex-end;
+  font-size: 0.65rem;
+  font-style: italic;
+  width: 15%;
+  height: fit-content;
+}
+
+.message-time-diff {
+  font-size: 0.65rem;
+}
+
+#post-button {
+  padding: 0.25rem;
+  width: 2.5rem;
+  height: 2.5rem;
+  align-self: center;
+  background-color: rgb(84, 172, 3);
+  border: none;
+  border-radius: 50px;
+  position: fixed;
+  bottom: 3rem;
+  right: 3rem;
+  color: whitesmoke;
+}
+
+#post-button:hover {
+  background-color: rgb(52, 105, 1);
+}
+
+#post-button:active {
+ background-color: rgb(32, 65, 1);
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  align-self: center;
+  background-color: rgb(85, 85, 85);
+  padding: 3rem;
+}
+
+.author {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 2rem
+}
+
+.name {
+  font-size: 1.5rem;
+  text-align: center;
+}
+
+.name-input {
+  height: 2rem;
+  width: 60vw;
+}
+
+.message {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 2rem
+}
+
+.message-text {
+  font-size: 1.5rem;
+  text-align: center;
+}
+
+.message-input {
+  width: 60vw;
+  padding: 10px; /* Add padding to the textarea */
+  box-sizing: border-box; /* Include padding and border in the element's total width and height */
+  resize: none; /* Prevent users from resizing the textarea */
+}
+
+.submit {
+  padding: 0.55rem;
+  align-self: center;
+  background-color: rgb(84, 172, 3);
+  border: none;
+  color: whitesmoke;
+}
+
+.submit:hover {
+  background-color: rgb(52, 105, 1);
+}
+
+.submit:active {
+ background-color: rgb(32, 65, 1);
+}

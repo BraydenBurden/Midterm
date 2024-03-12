@@ -1,0 +1,15 @@
+extends layout
+
+block content
+  h1.title= title
+  form.form(method='POST' action='/newMessage')
+
+    div.author
+      label.name(for='messageUser') Author's Name
+      input.name-input(type='text' name='messageUser' required)
+
+    div.message
+      label.message-text(for='messageText') Message
+      textarea.message-input(type='text' name='messageText', rows="20" required)
+
+    input.submit(type='submit' value='Submit')

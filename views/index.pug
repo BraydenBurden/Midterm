@@ -1,0 +1,13 @@
+extends layout
+
+block content
+  h1.title= title
+  h2.info= `Explore, engage, and add your voice! Click the "+" button in the bottom right to share your thoughts. Let the conversation flow`
+  each message in messages
+    div.message-container
+      p.message-time-diff= `${timeAgo(message.added)}`
+      h3.message-user= `${message.user}:`
+      p.message-text= `${message.text}`
+      p.message-date= `${formatDate(message.added)}`
+  button#post-button(type='button', onclick='location.href="/new"') &#43;
+  div(id='bottom')
